@@ -1,0 +1,15 @@
+import socket
+c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+c.connect(("127.0.0.1", 1234))
+name = input("Enter your name ")
+c.send(bytes(name, 'utf-8'))
+print(c.recv(1024).decode())
+word = input("message: ")
+while word != "close connection" :
+ c.send(bytes(word, 'utf-8'))
+ res = c.recv(1024).decode()
+ print(res)
+ word = input("message: ")
+c.send(bytes(word, 'utf-8'))
+c.close()
+print("connection is closed")
